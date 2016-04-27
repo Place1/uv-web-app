@@ -23,9 +23,11 @@ class Upcoming extends React.Component {
 				{this.state.fakeData.map(data => {
 					return (
 						<div key={data.id}>
-							<img src={data.thumbnail} />
-							<h2 className="title">{data.title}</h2>
-							<p className="description">{data.description}</p>
+							<img className="thumbnail" src={data.thumbnail} />
+							<div>
+								<h2 className="title">{data.title}</h2>
+								<p className="description">{data.description}</p>
+							</div>
 						</div>
 					);
 				})}
