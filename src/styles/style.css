@@ -1,11 +1,31 @@
+body {
+	margin: 0;
+}
+
+.list {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
 .listItem {
-	width: 100%;
 	max-height: 210px;
-	padding: 10px;
+	padding: 6px;
 	display: flex;
 	justify-content: flex-start;
 }
 
+.thumbnail {
+	object-fit: cover;
+	height: 100px;
+	width: 110px;
+	border-radius: 20px;
+}
+
 .content {
-	padding-left: 10px;
+	padding-left: 15px;
+}
+
+.content .title {
+	margin: 0;
 }
