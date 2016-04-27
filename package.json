@@ -7,7 +7,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "serve": "webpack-dev-server",
-    "lint": "eslint ."
+    "lint": "eslint ./src"
   },
   "author": "James Batt",
   "license": "MIT",

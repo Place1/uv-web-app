@@ -1,0 +1,11 @@
+.listItem {
+	width: 100%;
+	max-height: 210px;
+	padding: 10px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.content {
+	padding-left: 10px;
+}
