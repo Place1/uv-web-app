@@ -15,12 +15,23 @@ class Upcoming extends React.Component {
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
 				this.setState({
-					events: JSON.parse(xhr.responseText).results
+					events: JSON.parse(xhr.responseText).results.sort(function(a, b) {
+						return (Date.parse(a.startTime) > Date.parse(b.startTime)) ? 1 : -1;
+					})
 				});
 			}
 		};
 		xhr.setRequestHeader("Authorization", "Token 4a8ca0a0436c4b89e99e6cb97bfcc5b15b2888b0");  // testing key only
 		xhr.send(null);
+	}
+
+	truncateString(s) {
+		let words = s.split(" ");
+		let truncated = words.slice(0, 12);
+		if (words.length >= 12) {
+			truncated[truncated.length-1] += "...";
+		}
+		return truncated.join(" ");
 	}
 
 	render() {
@@ -32,7 +43,8 @@ class Upcoming extends React.Component {
 							<img className="thumbnail" src={data.facebookProfileSource} />
 							<div className="content">
 								<h2 className="title">{data.name}</h2>
-								<p className="description">{data.description.substring(0, Math.min(150, data.description.length))}</p>
+								<p className="date">{(new Date(data.startTime)).toDateString()}</p>
+								<p className="description">{this.truncateString(data.description)}</p>
 							</div>
 						</div>
 					);
