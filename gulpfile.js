@@ -1,5 +1,7 @@
 const gulp = require('gulp');
 const path = require('path');
+const autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
 const webpack = require('gulp-webpack');
 const WebpackDevServer = require("webpack-dev-server");
 const webpackConfig = require("./webpack.config.js");
@@ -12,6 +14,9 @@ const paths = {
 
 gulp.task('css', function() {
 	return gulp.src(paths.styles)
+		.pipe(sourcemaps.init())
+		.pipe(autoprefixer())
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.dist + 'css/'));
 });
 
