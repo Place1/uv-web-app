@@ -1,13 +1,11 @@
 import { AUTH_CHANGED } from '../actions/AuthChanged';
 
+const token = window.localStorage.getItem('jwt');
+
 const initialState = {
 	userInfo: {
-		// isAuthenticated: false,
-		// username: null,
-		// password: null
-		isAuthenticated: true,
-		username: 'test',
-		password: '123'
+		isAuthenticated: (token !== null),
+		jwt: token
 	}
 };
 

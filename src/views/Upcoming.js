@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { authChanged } from '../actions/AuthChanged';
 
 function mapStateToProps(state) {
 	return {
@@ -7,11 +8,20 @@ function mapStateToProps(state) {
 	};
 }
 
-@connect(mapStateToProps, null)
+function mapDispatchToProps(dispatch) {
+	return {
+		authChanged: (status, jwt) => {
+			return dispatch(authChanged(status, jwt));
+		}
+	};
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 class Upcoming extends React.Component {
 
 	static propTypes = {
-		userInfo: PropTypes.object.isRequired
+		userInfo: PropTypes.object.isRequired,
+		authChanged: PropTypes.func.isRequired
 	}
 
 	constructor(props) {
@@ -34,8 +44,11 @@ class Upcoming extends React.Component {
 					})
 				});
 			}
+			else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 401) {
+				return this.props.authChanged(false, null);
+			}
 		};
-		xhr.setRequestHeader("Authorization", "Basic " + btoa(this.props.userInfo.username + ":" + this.props.userInfo.password));
+		xhr.setRequestHeader("Authorization", `JWT ${this.props.userInfo.jwt}`);
 		xhr.send(null);
 	}
 

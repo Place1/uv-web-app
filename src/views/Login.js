@@ -25,12 +25,14 @@ class LoginView extends React.Component {
 		e.preventDefault();
 		const data = new FormData(this.refs.form);
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://localhost:8000/api/v0.2/user/');
+		xhr.open('POST', 'http://localhost:8000/api/v0.2/getWebToken/');
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === XMLHttpRequest.DONE) {
 				switch(xhr.status) {
 					case 200:
-						this.props.setAuthStatus(true, data.get('username'), data.get('password'));
+						const token = JSON.parse(xhr.responseText).token;
+						this.props.setAuthStatus(true, token);
+						window.localStorage.setItem('jwt', token);
 						break;
 					case 401:
 						this.setState({
@@ -45,7 +47,6 @@ class LoginView extends React.Component {
 				}
 			}
 		};
-		xhr.setRequestHeader("Authorization", "Basic " + btoa(data.get('username') + ":" + data.get('password')));
 		xhr.send(data);
 	}
 
