@@ -70,10 +70,24 @@ body {
 
 .loginForm input[type='submit'] {
 	margin-top: 20px;
+	border-width: 1px;
+	border-radius: 8px;
+	border-color: rgb(208, 208, 208);
+	background-color: white;
 }
 
-.loginForm input {
+.loginForm input[type='submit']:hover {
+	background-color: rgba(86, 227, 147, 0.3);
+}
+
+.loginForm input[type='text'],
+.loginForm input[type='password'] {
 	margin-bottom: 20px;
+	height: 25px;
+	border-width: 1px;
+	border-radius: 8px;
+	border-style: solid;
+	border-color: rgb(208, 208, 208);
 }
 
 .help-text {
