@@ -2,9 +2,12 @@ import { AUTH_CHANGED } from '../actions/AuthChanged';
 
 const initialState = {
 	userInfo: {
-		isAuthenticated: false,
-		username: null,
-		password: null
+		// isAuthenticated: false,
+		// username: null,
+		// password: null
+		isAuthenticated: true,
+		username: 'test',
+		password: '123'
 	}
 };
 

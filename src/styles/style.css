@@ -19,32 +19,46 @@ body {
 
 .thumbnail {
 	object-fit: cover;
-	height: 100px;
-	width: 110px;
+	height: 75px;
+	width: 80px;
 	border-radius: 20px;
 }
 
 .content {
 	padding-left: 15px;
+	flex-shrink: 20;
 }
 
 .title {
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: 500;
 }
 
 .date {
-	margin: 9px 0px;
+	margin: 7px 0px;
+	color: rgb(41, 41, 41);
+}
+
+.seperator {
+	background-color: rgb(208, 208, 208);
+}
+
+.seperator-date {
+	text-align: center;
+	width: 100%;
+	height: 100%;
 }
 
 .description {
 	margin: 0;
 	width: 100%;
-	word-break: break-all;
+	overflow-wrap: break-word;
+  word-wrap: break-word;
+	color: rgb(110, 110, 110);
 }
 
 .date, .description {
-	color: rgb(110, 110, 110);
+	font-size: 13px;
 }
 
 .content .title {
