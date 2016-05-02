@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
+function mapStateToProps(state) {
+	return {
+		userInfo: state.userInfo
+	};
+}
+
+@connect(mapStateToProps, null)
 class Upcoming extends React.Component {
+
+	static propTypes = {
+		userInfo: PropTypes.object.isRequired
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,7 +34,7 @@ class Upcoming extends React.Component {
 				});
 			}
 		};
-		xhr.setRequestHeader('Authorization', 'Token 2ed2adb92eeb798aef1a9530e41289963988b49a');  // testing key only
+		xhr.setRequestHeader("Authorization", "Basic " + btoa(this.props.userInfo.username + ":" + this.props.userInfo.password));
 		xhr.send(null);
 	}
 

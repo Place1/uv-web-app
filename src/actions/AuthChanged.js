@@ -1,19 +1,19 @@
-import BaseAction from './BaseAction';
+const AUTH_CHANGED = "AUTH_CHANGED";
 
-class AuthChanged extends BaseAction {
-
-	static type = 'AUTH_CHANGED'
-
-	constructor(status) {
-		super(status);
-		this.status = status;
+function authChanged(status, username, password) {
+	return {
+		type: AUTH_CHANGED,
+		handle: function(state) {
+			return Object.assign({}, state, {
+				userInfo: {
+					isAuthenticated: status,
+					username: username,
+					password: password
+				}
+			});
+		}
 	}
-
-	handle(state) {
-		state.isAuthenticated = this.status;
-		return state
-	}
-
 }
 
-export default AuthChanged;
+export { authChanged };
+export { AUTH_CHANGED };

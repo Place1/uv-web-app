@@ -1,12 +1,16 @@
-import AuthChanged from '../actions/AuthChanged';
+import { AUTH_CHANGED } from '../actions/AuthChanged';
 
 const initialState = {
-	isAuthenticated: false
+	userInfo: {
+		isAuthenticated: false,
+		username: null,
+		password: null
+	}
 };
 
 function reducer(state=initialState, action) {
 	switch(action.type) {
-		case AuthChanged.type:
+		case AUTH_CHANGED:
 			return action.handle(state);
 
 		default:
