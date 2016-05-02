@@ -4,10 +4,10 @@
   "description": "react_js_boilerplate",
   "main": "src/App.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack-dev-server",
-    "lint": "eslint ./src"
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
   },
   "author": "James Batt",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
-    "react-router": "^2.3.0",
+    "react-router": "^2.4.0",
     "redux": "^3.5.2"
   }
 }
