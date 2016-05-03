@@ -2,10 +2,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { authChanged } from '../actions/AuthChanged';
 import { Link } from 'react-router';
+import { setEvents } from '../actions/SetEvents';
 
 function mapStateToProps(state) {
 	return {
-		userInfo: state.userInfo
+		userInfo: state.userInfo,
+		events: state.events
 	};
 }
 
@@ -13,6 +15,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		authChanged: (status, jwt) => {
 			return dispatch(authChanged(status, jwt));
+		},
+		setEvents: (events) => {
+			return dispatch(setEvents(events));
 		}
 	};
 }
@@ -22,14 +27,9 @@ class Upcoming extends React.Component {
 
 	static propTypes = {
 		userInfo: PropTypes.object.isRequired,
-		authChanged: PropTypes.func.isRequired
-	}
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			events: [],
-		};
+		events: PropTypes.array.isRequired,
+		authChanged: PropTypes.func.isRequired,
+		setEvents: PropTypes.func.isRequired
 	}
 
 	componentDidMount() {
@@ -39,11 +39,9 @@ class Upcoming extends React.Component {
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
 				const data = JSON.parse(xhr.responseText);
-				this.setState({
-					events: data.results.sort(function (a, b) {
+				this.props.setEvents(data.results.sort(function (a, b) {
 						return (Date.parse(a.startTime) > Date.parse(b.startTime)) ? 1 : -1;
-					})
-				});
+				}));
 			}
 			else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 401) {
 				return this.props.authChanged(false, null);
@@ -66,11 +64,11 @@ class Upcoming extends React.Component {
 		return (
 			<div className="list">
 				{(() => {
-					if (this.state.events.length === 0) {
+					if (this.props.events.length === 0) {
 						return <div className="listItem">No events</div>
 					}
 					else {
-						return this.state.events.map((data, index, array) => {
+						return this.props.events.map((data, index, array) => {
 							let seperator = null;
 							if (index === 0 || (new Date(array[index-1].startTime).getDate() !== (new Date(data.startTime)).getDate())) {
 								seperator = (

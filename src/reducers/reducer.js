@@ -6,16 +6,16 @@ const initialState = {
 	userInfo: {
 		isAuthenticated: (token !== null),
 		jwt: token
-	}
+	},
+	events: [],
 };
 
 function reducer(state=initialState, action) {
-	switch(action.type) {
-		case AUTH_CHANGED:
-			return action.handle(state);
-
-		default:
-			return state;
+	if (action.handle !== undefined) {
+		return action.handle(state);
+	}
+	else {
+		return state;
 	}
 }
 
