@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import reducer from './reducers/reducer';
 import Upcoming from './views/Upcoming';
 import Login from './views/Login';
+import EventInfo from './views/EventInfo';
 
 let store = createStore(reducer);
 
@@ -28,7 +29,10 @@ class App extends React.Component {
 				{(() => {
 					if (this.props.isAuthenticated) {
 						return (
-							<Upcoming />
+							<Router history={browserHistory}>
+								<Route path="/" component={Upcoming} />
+								<Route path="/event/:id" component={EventInfo} />
+							</Router>
 						);
 					}
 					else {

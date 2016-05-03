@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { authChanged } from '../actions/AuthChanged';
+import { Link } from 'react-router';
 
 function mapStateToProps(state) {
 	return {
@@ -81,13 +82,15 @@ class Upcoming extends React.Component {
 							return (
 								<div key={data.id}>
 									{seperator}
-									<div className="listItem">
-										<img className="thumbnail" src={data.facebookProfileSource} />
-										<div className="content">
-											<h2 className="title">{data.name}</h2>
-											<p className="description">{this.truncateString(data.description)}</p>
+									<Link to={`/event/${data.id}`}>
+										<div className="listItem">
+											<img className="thumbnail" src={data.facebookProfileSource} />
+											<div className="content">
+												<h2 className="title">{data.name}</h2>
+												<p className="description">{this.truncateString(data.description)}</p>
+											</div>
 										</div>
-									</div>
+									</Link>
 								</div>
 							);
 						})

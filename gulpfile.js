@@ -1,9 +1,8 @@
 const gulp = require('gulp');
 const path = require('path');
 const autoprefixer = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
-const webpack = require('gulp-webpack');
-const WebpackDevServer = require("webpack-dev-server");
+const sourcemaps = require('gulp-sourcemaps');
+const webpack = require('webpack-stream');
 const webpackConfig = require("./webpack.config.js");
 
 const paths = {
@@ -29,4 +28,8 @@ gulp.task('build', function() {
 gulp.task('watch', ['css', 'build'], function() {
 	gulp.watch(paths.styles, ['css']);
 	gulp.watch(paths.js, ['build']);
+});
+
+gulp.task('serve', function() {
+
 });
