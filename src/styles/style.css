@@ -143,3 +143,17 @@ body {
 	flex-basis: 0;
 	flex-grow: 1;
 }
+
+
+/* NavBar styles */
+.navBar {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 6px;
+}
+
+.navTitle {
+	font-size: 23px;
+	font-weight: 100;
+	margin: 0px;
+}

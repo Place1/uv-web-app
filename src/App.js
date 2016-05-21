@@ -7,6 +7,7 @@ import reducer from './reducers/reducer';
 import Upcoming from './views/Upcoming';
 import Login from './views/Login';
 import EventInfo from './views/EventInfo';
+import NavBar from './components/NavBar';
 
 let store = createStore(reducer);
 
@@ -25,10 +26,13 @@ class App extends React.Component {
 
 	render_authenticated() {
 		return (
-			<Router history={browserHistory}>
-				<Route path="/" component={Upcoming} />
-				<Route path="/event/:id" component={EventInfo} />
-			</Router>
+			<div>
+				<NavBar />
+				<Router history={browserHistory}>
+					<Route path="/" component={Upcoming} />
+					<Route path="/event/:id" component={EventInfo} />
+				</Router>
+			</div>
 		);
 	}
 
