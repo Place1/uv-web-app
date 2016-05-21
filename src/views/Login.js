@@ -67,7 +67,7 @@ class LoginView extends React.Component {
 						name="password"
 					/>
 					<span className="help-text">{this.state.helpText}</span>
-					<input type="submit" />
+					<button type="submit">Login</button>
 				</form>
 			</div>
 		);

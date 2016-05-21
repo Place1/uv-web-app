@@ -23,24 +23,28 @@ class App extends React.Component {
 		isAuthenticated: PropTypes.bool.isRequired
 	}
 
+	render_authenticated() {
+		return (
+			<Router history={browserHistory}>
+				<Route path="/" component={Upcoming} />
+				<Route path="/event/:id" component={EventInfo} />
+			</Router>
+		);
+	}
+
+	render_login() {
+		return (
+			<Login />
+		);
+	}
+
 	render() {
 		return (
 			<div>
-				{(() => {
-					if (this.props.isAuthenticated) {
-						return (
-							<Router history={browserHistory}>
-								<Route path="/" component={Upcoming} />
-								<Route path="/event/:id" component={EventInfo} />
-							</Router>
-						);
-					}
-					else {
-						return (
-							<Login />
-						);
-					}
-				})()}
+				{(this.props.isAuthenticated) ?
+					this.render_authenticated() :
+					this.render_login()
+				}
 			</div>
 		);
 	}
