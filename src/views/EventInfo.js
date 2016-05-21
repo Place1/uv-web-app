@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state, props) {
+	let event = state.events.find(element => {
+		if (element.id == props.params.id) {
+			return element;
+		}
+	});
 	return {
-		event: state.events.find(element => {
-			if (element.id == props.params.id) {
-				return element;
-			}
-		})
+		event: event
 	};
 }
 
