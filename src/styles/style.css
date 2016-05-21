@@ -3,6 +3,10 @@ body {
 	font-family: 'Droid Sans', sans-serif;
 }
 
+.noUnderline {
+	text-decoration: none !important;
+}
+
 .list {
 	display: flex;
 	justify-content: flex-start;

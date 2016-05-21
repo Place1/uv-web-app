@@ -80,7 +80,7 @@ class Upcoming extends React.Component {
 							return (
 								<div key={data.id}>
 									{seperator}
-									<Link to={`/event/${data.id}`}>
+									<Link to={`/event/${data.id}`} className="noUnderline">
 										<div className="listItem">
 											<img className="thumbnail" src={data.facebookProfileSource} />
 											<div className="content">
