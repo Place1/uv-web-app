@@ -62,38 +62,40 @@ class Upcoming extends React.Component {
 
 	render() {
 		return (
-			<div className="list">
-				{(() => {
-					if (this.props.events.length === 0) {
-						return <div className="listItem">No events</div>
-					}
-					else {
-						return this.props.events.map((data, index, array) => {
-							let seperator = null;
-							if (index === 0 || (new Date(array[index-1].startTime).getDate() !== (new Date(data.startTime)).getDate())) {
-								seperator = (
-									<div className="listItem seperator">
-										<span className="seperator-date">{(new Date(data.startTime)).toDateString()}</span>
+			<div>
+				<div className="list">
+					{(() => {
+						if (this.props.events.length === 0) {
+							return <div className="listItem">No events</div>
+						}
+						else {
+							return this.props.events.map((data, index, array) => {
+								let seperator = null;
+								if (index === 0 || (new Date(array[index-1].startTime).getDate() !== (new Date(data.startTime)).getDate())) {
+									seperator = (
+										<div className="listItem seperator">
+											<span className="seperator-date">{(new Date(data.startTime)).toDateString()}</span>
+										</div>
+									);
+								}
+								return (
+									<div key={data.id}>
+										{seperator}
+										<Link to={`/event/${data.id}`} className="noUnderline">
+											<div className="listItem">
+												<img className="thumbnail" src={data.facebookProfileSource} />
+												<div className="content">
+													<h2 className="title">{data.name}</h2>
+													<p className="description">{this.truncateString(data.description)}</p>
+												</div>
+											</div>
+										</Link>
 									</div>
 								);
-							}
-							return (
-								<div key={data.id}>
-									{seperator}
-									<Link to={`/event/${data.id}`} className="noUnderline">
-										<div className="listItem">
-											<img className="thumbnail" src={data.facebookProfileSource} />
-											<div className="content">
-												<h2 className="title">{data.name}</h2>
-												<p className="description">{this.truncateString(data.description)}</p>
-											</div>
-										</div>
-									</Link>
-								</div>
-							);
-						})
-					}
-				})()}
+							})
+						}
+					})()}
+				</div>
 			</div>
 		);
 	}

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers/reducer';
@@ -27,11 +28,15 @@ class App extends React.Component {
 	render_authenticated() {
 		return (
 			<div>
-				<NavBar />
-				<Router history={browserHistory}>
-					<Route path="/" component={Upcoming} />
-					<Route path="/event/:id" component={EventInfo} />
-				</Router>
+				<ReactCSSTransitionGroup
+					transitionName="navigation-animation"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+				>
+					{React.cloneElement(this.props.children, {
+            key: this.props.location.pathname
+          })}
+        </ReactCSSTransitionGroup>
 			</div>
 		);
 	}
@@ -56,7 +61,12 @@ class App extends React.Component {
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<Router history={browserHistory}>
+			<Route path="/" component={App}>
+				<IndexRoute component={Upcoming} />
+				<Route path="/event/:id" component={EventInfo} />
+			</Route>
+		</Router>
 	</Provider>
 	, document.getElementById('App')
 );

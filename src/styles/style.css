@@ -157,3 +157,23 @@ body {
 	font-weight: 100;
 	margin: 0px;
 }
+
+
+/* animations */
+.navigation-animation-enter {
+  opacity: 0.01;
+}
+
+.navigation-animation-enter.navigation-animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.navigation-animation-leave {
+  opacity: 1;
+}
+
+.navigation-animation-leave.navigation-animation-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
