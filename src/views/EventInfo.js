@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import ExpandingButton from '../components/ExpandingButton';
 
 function mapStateToProps(state, props) {
 	let event = state.events.find(element => {
@@ -40,7 +41,10 @@ class EventInfo extends React.Component {
 				<div className="eventContent">
 					<h2 className="eventTitle">{this.props.event.name}</h2>
 					<span className="eventDate">{new Date(this.props.event.startTime).toDateString()}</span>
-					<p className="eventDescription">{this.props.event.description}</p>
+						<ExpandingButton
+							title="Description"
+							content={this.props.event.description}
+						/>
 				</div>
 			</div>
 		);

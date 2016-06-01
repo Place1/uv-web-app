@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers/reducer';
@@ -22,7 +22,8 @@ function mapStateToProps(state) {
 class App extends React.Component {
 
 	static propTypes = {
-		isAuthenticated: PropTypes.bool.isRequired
+		isAuthenticated: PropTypes.bool.isRequired,
+		children: PropTypes.node.isRequired,
 	}
 
 	render_authenticated() {
@@ -61,7 +62,7 @@ class App extends React.Component {
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router history={browserHistory}>
+		<Router history={hashHistory}>
 			<Route path="/" component={App}>
 				<IndexRoute component={Upcoming} />
 				<Route path="/event/:id" component={EventInfo} />

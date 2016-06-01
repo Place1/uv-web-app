@@ -144,6 +144,15 @@ body {
 	flex-grow: 1;
 }
 
+/* expanding button */
+.ExpandingButton {
+	padding: 8px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 15px;
+	border-color: rgb(73, 219, 164);
+}
+
 
 /* NavBar styles */
 .navBar {
