@@ -25,7 +25,7 @@ class LoginView extends React.Component {
 		e.preventDefault();
 		const data = new FormData(this.refs.form);
 		const xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:8000/api/v0.2/getWebToken/');
+		xhr.open('POST', 'https://api.univent.com.au/api/v0.2/getWebToken/');
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === XMLHttpRequest.DONE) {
 				switch(xhr.status) {

@@ -9,6 +9,7 @@ import Upcoming from './views/Upcoming';
 import Login from './views/Login';
 import EventInfo from './views/EventInfo';
 import NavBar from './components/NavBar';
+import './styles/style.css'
 
 let store = createStore(reducer);
 

@@ -1,22 +1,10 @@
-import { AUTH_CHANGED } from '../actions/AuthChanged';
+import { combineReducers } from 'redux';
+import userInfo from './userinfo';
+import events from './events';
 
-const token = window.localStorage.getItem('jwt');
-
-const initialState = {
-	userInfo: {
-		isAuthenticated: (token !== null),
-		jwt: token
-	},
-	events: [],
-};
-
-function reducer(state=initialState, action) {
-	if (action.handle !== undefined) {
-		return action.handle(state);
-	}
-	else {
-		return state;
-	}
-}
+const reducer = combineReducers({
+	events: events,
+	userInfo: userInfo
+});
 
 export default reducer;
