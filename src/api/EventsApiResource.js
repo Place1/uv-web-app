@@ -16,6 +16,14 @@ class EventsApiResource {
 			headers: this.headers,
 		});
 	}
+
+	newEvents() {
+		return axios({
+			method: 'GET',
+			url: this._url + 'new/',
+			headers: this.headers,
+		});
+	}
 }
 
 export default EventsApiResource;
