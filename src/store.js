@@ -11,6 +11,10 @@ function loggingMiddleware(store) {
 function promiseMiddleware(store) {
 	return next => action => {
 		if (action.payload instanceof Promise) {
+			store.dispatch({
+				type: `${action.type}_PENDING`,
+				payload: null,
+			});
 			action.payload
 				.then(data => store.dispatch({
 					type: `${action.type}_RESOLVED`,
