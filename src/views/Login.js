@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authChanged } from '../actions/AuthChanged';
+import Api from '../api';
 
 function mapDispatchToProps(dispatch) {
 	return {
@@ -23,31 +24,24 @@ class LoginView extends React.Component {
 
 	handleLogin(e) {
 		e.preventDefault();
-		const data = new FormData(this.refs.form);
-		const xhr = new XMLHttpRequest();
-		xhr.open('POST', 'https://api.univent.com.au/api/v0.2/getWebToken/');
-		xhr.onreadystatechange = () => {
-			if (xhr.readyState === XMLHttpRequest.DONE) {
-				switch(xhr.status) {
-					case 200:
-						const token = JSON.parse(xhr.responseText).token;
-						this.props.setAuthStatus(true, token);
-						window.localStorage.setItem('jwt', token);
-						break;
-					case 401:
-						this.setState({
-							helpText: 'invalid username or password'
-						});
-						break;
-					default:
-						this.setState({
-							helpText: 'unknown error'
-						});
-						break;
+		const username = e.target.elements['username'].value;
+		const password = e.target.elements['password'].value;
+		Api.getWebToken(username, password)
+			.then(res => {
+				const token = res.token;
+				this.props.setAuthStatus(true, token);
+				window.localStorage.setItem('jwt', token);
+			})
+			.catch(err => {
+				let helpText = '';
+				if (err.status === 401) {
+					helpText = 'invalid username or password';
 				}
-			}
-		};
-		xhr.send(data);
+				else {
+					helpText = 'unknown error';
+				}
+				this.setState({ helpText });
+			})
 	}
 
 	render() {
