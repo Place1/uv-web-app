@@ -7,7 +7,8 @@ import { setEvents } from '../actions/SetEvents';
 function mapStateToProps(state) {
 	return {
 		userInfo: state.userInfo,
-		events: state.events
+		events: state.events.items,
+		loading: state.events.fetching,
 	};
 }
 
@@ -25,7 +26,8 @@ class Upcoming extends React.Component {
 	static propTypes = {
 		userInfo: PropTypes.object.isRequired,
 		events: PropTypes.array.isRequired,
-		setEvents: PropTypes.func.isRequired
+		setEvents: PropTypes.func.isRequired,
+		loading: PropTypes.bool.isRequired,
 	}
 
 	componentDidMount() {
@@ -42,6 +44,10 @@ class Upcoming extends React.Component {
 	}
 
 	render() {
+		if (this.props.loading) {
+			return <div>loading</div>;
+		}
+
 		return (
 			<div>
 				<div className="list">
