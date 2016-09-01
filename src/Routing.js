@@ -7,7 +7,7 @@ const Routing = React.createClass({
 	render: function() {
 		return (
 			<Router history={hashHistory}>
-				<Route path="/" component={views.App}>
+				<Route path="/" component={App}>
 					<IndexRoute component={views.Upcoming} />
 					<Route path="/event/:id" component={views.EventInfo} />
 				</Route>
