@@ -13,9 +13,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		authChanged: (username, password) => {
-			return dispatch(login(username, password));
-		},
 		setEvents: () => {
 			return dispatch(setEvents());
 		}
@@ -28,7 +25,6 @@ class Upcoming extends React.Component {
 	static propTypes = {
 		userInfo: PropTypes.object.isRequired,
 		events: PropTypes.array.isRequired,
-		authChanged: PropTypes.func.isRequired,
 		setEvents: PropTypes.func.isRequired
 	}
 

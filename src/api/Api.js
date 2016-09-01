@@ -1,14 +1,22 @@
 import axios from 'axios';
+import store from '../store';
 import EventsApiResource from './EventsApiResource';
 
 class Api {
 
 	constructor({ baseUrl }) {
 		this._baseUrl = baseUrl;
+		axios.interceptors.request.use(this._setAuthHeader);
 	}
 
 	_endpoint(path) {
 		return `${this._baseUrl}${path}/`
+	}
+
+	_setAuthHeader(config) {
+		const jwt = store.getState().userInfo.jwt;
+		config.headers['Authorization'] = `JWT ${jwt}`;
+		return config;
 	}
 
 	getWebToken(username, password) {

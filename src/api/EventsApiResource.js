@@ -4,16 +4,12 @@ import store from '../store';
 class EventsApiResource {
 	constructor(url) {
 		this._url = url;
-		this.headers = {
-			Authorization: `JWT ${store.getState().userInfo.jwt}`
-		}
 	}
 
 	trending() {
 		return axios({
 			method: 'GET',
 			url: this._url + 'trending/',
-			headers: this.headers,
 		});
 	}
 
@@ -21,7 +17,6 @@ class EventsApiResource {
 		return axios({
 			method: 'GET',
 			url: this._url + 'new/',
-			headers: this.headers,
 		});
 	}
 }
