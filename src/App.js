@@ -7,13 +7,19 @@ import Upcoming from './views/Upcoming';
 import Login from './views/Login';
 import EventInfo from './views/EventInfo';
 import NavBar from './components/NavBar';
+import verifyToken from './actions/verifyToken';
 import store from './store';
 import './styles/style.css'
 
+const jwt = store.getState().userInfo.jwt;
+if (jwt) {
+	store.dispatch(verifyToken(jwt));
+}
 
 function mapStateToProps(state) {
 	return {
-		isAuthenticated: state.userInfo.isAuthenticated
+		isAuthenticated: state.userInfo.isAuthenticated,
+		loading: state.appmeta.loading,
 	};
 }
 
@@ -23,6 +29,10 @@ class App extends React.Component {
 	static propTypes = {
 		isAuthenticated: PropTypes.bool.isRequired,
 		children: PropTypes.node.isRequired,
+	}
+
+	constructor(props) {
+		super(props);
 	}
 
 	render_authenticated() {
@@ -47,7 +57,16 @@ class App extends React.Component {
 		);
 	}
 
+	render_loading() {
+		return (
+			<div>loading</div>
+		);
+	}
+
 	render() {
+		if (this.props.loading) {
+			return this.render_loading();
+		}
 		return (
 			<div>
 				{(this.props.isAuthenticated) ?

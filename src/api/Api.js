@@ -27,6 +27,14 @@ class Api {
 		});
 	}
 
+	verifyWebToken(token) {
+		return axios({
+			method: 'POST',
+			url: this._endpoint('verifyWebToken'),
+			data: { token }
+		});
+	}
+
 	get events() {
 		return new EventsApiResource(this._endpoint('event'));
 	}
