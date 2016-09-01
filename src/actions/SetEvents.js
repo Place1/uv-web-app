@@ -1,9 +1,12 @@
+import Api from '../api';
+
 const SET_EVENTS = "SET_EVENTS";
 
-function setEvents(events) {
+function setEvents() {
 	return {
 		type: SET_EVENTS,
-		payload: events,
+		payload: Api.events.trending()
+			.then(r => r.data)
 	}
 }
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import EventsApiResource from './EventsApiResource';
 
 class Api {
 
@@ -16,6 +17,10 @@ class Api {
 			url: this._endpoint('getWebToken'),
 			data: { username, password }
 		});
+	}
+
+	get events() {
+		return new EventsApiResource(this._endpoint('event'));
 	}
 }
 

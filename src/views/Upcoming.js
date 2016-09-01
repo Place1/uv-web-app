@@ -16,8 +16,8 @@ function mapDispatchToProps(dispatch) {
 		authChanged: (username, password) => {
 			return dispatch(login(username, password));
 		},
-		setEvents: (events) => {
-			return dispatch(setEvents(events));
+		setEvents: () => {
+			return dispatch(setEvents());
 		}
 	};
 }
@@ -33,22 +33,7 @@ class Upcoming extends React.Component {
 	}
 
 	componentDidMount() {
-		// request real data from UV api
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://localhost:8000/api/v0.2/event/trending/', true);
-		xhr.onreadystatechange = () => {
-			if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				const data = JSON.parse(xhr.responseText);
-				this.props.setEvents(data.results.sort(function (a, b) {
-						return (Date.parse(a.startTime) > Date.parse(b.startTime)) ? 1 : -1;
-				}));
-			}
-			else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 401) {
-				return this.props.authChanged(false, null);
-			}
-		};
-		xhr.setRequestHeader("Authorization", `JWT ${this.props.userInfo.jwt}`);
-		xhr.send(null);
+		this.props.setEvents();
 	}
 
 	truncateString(s) {
@@ -86,7 +71,7 @@ class Upcoming extends React.Component {
 												<img className="thumbnail" src={data.facebookProfileSource} />
 												<div className="content">
 													<h2 className="title">{data.name}</h2>
-													<p className="description">{this.truncateString(data.description)}</p>
+													<p className="description">{this.truncateString(data.description || '')}</p>
 												</div>
 											</div>
 										</Link>
