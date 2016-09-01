@@ -153,21 +153,6 @@ body {
 	border-color: rgb(73, 219, 164);
 }
 
-
-/* NavBar styles */
-.navBar {
-	display: flex;
-	justify-content: space-between;
-	padding: 15px 6px;
-}
-
-.navTitle {
-	font-size: 23px;
-	font-weight: 100;
-	margin: 0px;
-}
-
-
 /* animations */
 .navigation-animation-enter {
   opacity: 0.01;

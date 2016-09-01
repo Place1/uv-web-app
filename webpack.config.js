@@ -15,7 +15,7 @@ let plugins = [
 
 module.exports = {
 	devtool: 'eval-source-map',
-	entry: './src/App.js',
+	entry: './src/index.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'App.js',
@@ -34,6 +34,9 @@ module.exports = {
 		}, {
 			test: /.css$/,
 			loaders: ['style', 'css']
+		}, {
+			test: /.scss$/,
+			loaders: ['style', 'css', 'sass']
 		}]
 	},
 	devServer: {
