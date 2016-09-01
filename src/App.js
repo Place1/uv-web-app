@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import { Provider, connect } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './reducers/reducer';
 import Upcoming from './views/Upcoming';
 import Login from './views/Login';
 import EventInfo from './views/EventInfo';
 import NavBar from './components/NavBar';
+import store from './store';
 import './styles/style.css'
 
-let store = createStore(reducer);
 
 function mapStateToProps(state) {
 	return {

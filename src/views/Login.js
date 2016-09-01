@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authChanged } from '../actions/AuthChanged';
-import Api from '../api';
+import { login } from '../actions/login';
 
 function mapDispatchToProps(dispatch) {
 	return {
-		setAuthStatus: (status, username, password) => {
-			dispatch(authChanged(status, username, password));
+		login: (username, password) => {
+			dispatch(login(username, password));
 		}
 	};
 }
@@ -26,22 +25,7 @@ class LoginView extends React.Component {
 		e.preventDefault();
 		const username = e.target.elements['username'].value;
 		const password = e.target.elements['password'].value;
-		Api.getWebToken(username, password)
-			.then(res => {
-				const token = res.token;
-				this.props.setAuthStatus(true, token);
-				window.localStorage.setItem('jwt', token);
-			})
-			.catch(err => {
-				let helpText = '';
-				if (err.status === 401) {
-					helpText = 'invalid username or password';
-				}
-				else {
-					helpText = 'unknown error';
-				}
-				this.setState({ helpText });
-			})
+		this.props.login(username, password);
 	}
 
 	render() {

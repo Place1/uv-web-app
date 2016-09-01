@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { authChanged } from '../actions/AuthChanged';
+import { login } from '../actions/login';
 import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
 
@@ -13,8 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		authChanged: (status, jwt) => {
-			return dispatch(authChanged(status, jwt));
+		authChanged: (username, password) => {
+			return dispatch(login(username, password));
 		},
 		setEvents: (events) => {
 			return dispatch(setEvents(events));
