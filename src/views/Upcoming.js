@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { login } from '../actions/login';
 import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 function mapStateToProps(state) {
 	return {
@@ -45,7 +46,7 @@ class Upcoming extends React.Component {
 
 	render() {
 		if (this.props.loading) {
-			return <div>loading</div>;
+			return <LoadingIndicator />;
 		}
 
 		return (

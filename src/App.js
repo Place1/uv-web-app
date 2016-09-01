@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import { Provider, connect } from 'react-redux';
+import LoadingIndicator from './components/LoadingIndicator';
 import Upcoming from './views/Upcoming';
 import Login from './views/Login';
 import EventInfo from './views/EventInfo';
@@ -59,7 +60,7 @@ class App extends React.Component {
 
 	render_loading() {
 		return (
-			<div>loading</div>
+			<LoadingIndicator />
 		);
 	}
 

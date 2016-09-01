@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ExpandingButton from '../components/ExpandingButton';
 
 function mapStateToProps(state, props) {
-	let event = state.events.find(element => {
+	let event = state.events.items.find(element => {
 		if (element.id == props.params.id) {
 			return element;
 		}
