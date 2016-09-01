@@ -6,6 +6,14 @@ class EventsApiResource {
 		this._url = url;
 	}
 
+	get(params) {
+		return axios({
+			method: 'GET',
+			url: this._url,
+			params: params,
+		})
+	}
+
 	trending() {
 		return axios({
 			method: 'GET',

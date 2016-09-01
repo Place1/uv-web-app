@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import LoadingIndicator from '../components/LoadingIndicator';
 import ExpandingButton from '../components/ExpandingButton';
+import loadEvents from '../actions/loadEvents';
 
 function mapStateToProps(state, props) {
 	let event = state.events.items.find(element => {
@@ -13,14 +15,34 @@ function mapStateToProps(state, props) {
 	};
 }
 
-@connect(mapStateToProps, null)
+function mapDispatchToProps(dispatch, props) {
+	return {
+		loadEvent: () => {
+			return dispatch(loadEvents({ id: props.params.id }));
+		}
+	}
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 class EventInfo extends React.Component {
 
 	static propTypes = {
-		event: PropTypes.object.isRequired,
+		params: PropTypes.object.isRequired, // includes 'id' property.
+		event: PropTypes.object, // if not provided, loadEvent() will be called to get it.
+		loadEvent: PropTypes.func.isRequired,
+	}
+
+	componentDidMount() {
+		if (!this.props.event) {
+			this.props.loadEvent();
+		}
 	}
 
 	render() {
+		if (!this.props.event) {
+			return <LoadingIndicator />
+		}
+
 		return (
 			<div className="eventInfo">
 				<img className="eventCoverImage" src={this.props.event.facebookCoverSource} />
