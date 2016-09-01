@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
+import TabBar from './components/TabBar';
 import LoadingIndicator from './components/LoadingIndicator';
 
 function mapStateToProps(state) {
@@ -34,6 +35,7 @@ class App extends React.Component {
             key: this.props.location.pathname
           })}
         </ReactCSSTransitionGroup>
+				<TabBar />
 			</div>
 		);
 	}

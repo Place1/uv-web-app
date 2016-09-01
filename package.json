@@ -5,9 +5,7 @@
   "main": "src/App.js",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack-dev-server --inline --hot -d",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "serve": "webpack-dev-server --inline --hot -d"
   },
   "author": "James Batt",
   "license": "MIT",
@@ -20,21 +18,10 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.24.0",
-    "eslint": "^2.8.0",
-    "eslint-config-airbnb": "^8.0.0",
-    "eslint-plugin-import": "^1.6.0",
-    "eslint-plugin-jsx-a11y": "^1.0.3",
-    "eslint-plugin-react": "^5.0.1",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-sourcemaps": "^2.0.0-alpha",
-    "node-sass": "^3.8.0",
     "path": "^0.12.7",
-    "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.12",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-stream": "^3.2.0"
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "axios": "^0.14.0",
