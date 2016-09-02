@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let plugins = [
 	new webpack.DefinePlugin({
@@ -10,7 +11,11 @@ let plugins = [
 				process.env.UV_API_URL || 'https://api.univent.com.au/api/v0.2/'
 			),
 		}
-	})
+	}),
+
+	new CopyWebpackPlugin([
+		{from: './src/static', to: 'static'}
+	]),
 ]
 
 module.exports = {
