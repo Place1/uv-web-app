@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ExpandingButton from '../components/ExpandingButton';
 import loadEvents from '../actions/loadEvents';
+import setTitle from '../actions/setTitle';
 
 function mapStateToProps(state, props) {
 	let event = state.events.items.find(element => {
@@ -19,7 +20,8 @@ function mapDispatchToProps(dispatch, props) {
 	return {
 		loadEvent: () => {
 			return dispatch(loadEvents({ id: props.params.id }));
-		}
+		},
+		setTitle: title => dispatch(setTitle(title)),
 	}
 }
 
@@ -35,6 +37,15 @@ class EventInfo extends React.Component {
 	componentDidMount() {
 		if (!this.props.event) {
 			this.props.loadEvent();
+		}
+		else {
+			this.props.setTitle('');
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.event && nextProps.event.name) {
+			this.props.setTitle(nextProps.event.name);
 		}
 	}
 
