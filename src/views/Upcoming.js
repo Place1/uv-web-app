@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { login } from '../actions/login';
 import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
+import { setTitle } from '../actions/setTitle';
 import LoadingIndicator from '../components/LoadingIndicator';
 
 function mapStateToProps(state) {
@@ -15,9 +16,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		setEvents: () => {
-			return dispatch(setEvents());
-		}
+		setEvents: () => dispatch(setEvents()),
+		setTitle: title => dispatch(setTitle(title)),
 	};
 }
 
@@ -33,6 +33,7 @@ class Upcoming extends React.Component {
 
 	componentDidMount() {
 		this.props.setEvents();
+		this.props.setTitle('Upcoming');
 	}
 
 	truncateString(s) {

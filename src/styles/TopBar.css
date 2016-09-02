@@ -1,0 +1,22 @@
+.top-bar {
+	height: 50px;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	display: flex;
+	align-items: stretch;
+	justify-content: space-around;
+	color: rgb(27, 27, 27);
+	background-color: #42C668;
+}
+
+.top-bar__container {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.top-bar__container--middle {
+	flex-grow: 2.7;
+}

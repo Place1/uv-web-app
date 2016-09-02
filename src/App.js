@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import TabBar from './components/TabBar';
+import TopBar from './components/TopBar';
 import LoadingIndicator from './components/LoadingIndicator';
 
 function mapStateToProps(state) {
@@ -28,14 +29,13 @@ class App extends React.Component {
 			<div>
 				<ReactCSSTransitionGroup
 					transitionName="navigation-animation"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}
 				>
 					{React.cloneElement(this.props.children, {
-            key: this.props.location.pathname
-          })}
-        </ReactCSSTransitionGroup>
-				<TabBar />
+						key: this.props.location.pathname
+					})}
+				</ReactCSSTransitionGroup>
 			</div>
 		);
 	}
@@ -58,10 +58,12 @@ class App extends React.Component {
 		}
 		return (
 			<div>
+				<TopBar />
 				{(this.props.isAuthenticated) ?
 					this.render_authenticated() :
 					this.render_login()
 				}
+				<TabBar />
 			</div>
 		);
 	}
