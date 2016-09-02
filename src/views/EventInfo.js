@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ExpandingButton from '../components/ExpandingButton';
 import loadEvents from '../actions/loadEvents';
 import setTitle from '../actions/setTitle';
+import '../styles/EventInfo.css';
 
 function mapStateToProps(state, props) {
 	let event = state.events.items.find(element => {
@@ -62,22 +64,38 @@ class EventInfo extends React.Component {
 						<div>{this.props.event.attendingCount}</div>
 						<div>Attending</div>
 					</div>
+					<div className="eventStatsBox__item-spacer"></div>
 					<div className="eventStatsBoxItem">
 						<div>{this.props.event.maybeCount}</div>
 						<div>Maybe</div>
 					</div>
+					<div className="eventStatsBox__item-spacer"></div>
 					<div className="eventStatsBoxItem">
 						<div>{this.props.event.attendingCount + this.props.event.maybeCount + this.props.event.noReplyCount}</div>
 						<div>Invited</div>
 					</div>
 				</div>
-				<div className="eventContent">
+				<div className="eventHeaders">
 					<h2 className="eventTitle">{this.props.event.name}</h2>
-					<span className="eventDate">{new Date(this.props.event.startTime).toDateString()}</span>
-						<ExpandingButton
-							title="Description"
-							content={this.props.event.description}
-						/>
+					<h3 className="eventClub">{this.props.event.club_name}</h3>
+				</div>
+				<hr/>
+				<div className="eventContent">
+					<div className="eventDate">
+						<div className="eventDate__icon">
+							<i className="fa fa-clock-o" />
+						</div>
+						<div className="eventDate__text">
+							{moment(this.props.event.startTime).format('h:mmA dddd')}
+							<br/>
+							{moment(this.props.event.startTime).format('do MMMM')}
+						</div>
+					</div>
+					<ExpandingButton
+						title="Description"
+						content={this.props.event.description}
+						className="eventDescription"
+					/>
 				</div>
 			</div>
 		);

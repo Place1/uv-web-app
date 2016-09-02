@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import '../styles/ExpandingButton.css';
 
 class ExpandingButton extends React.Component {
 
@@ -6,6 +7,11 @@ class ExpandingButton extends React.Component {
 		title: PropTypes.string.isRequired,
 		content: PropTypes.node.isRequired,
 		expanded: PropTypes.bool, // should the button start expanded
+		className: PropTypes.string,
+	}
+
+	static defaultProps = {
+		className: '',
 	}
 
 	constructor(props) {
@@ -41,12 +47,14 @@ class ExpandingButton extends React.Component {
 	}
 
 	render() {
+		const expanded = this.state.expanded;
+		const modifierClass = !expanded ? 'ExpandingButton--small' : '';
 		return (
 			<div
-				className="ExpandingButton"
+				className={`ExpandingButton ${modifierClass} ${this.props.className}`}
 				onClick={this.handleClick}
 			>
-				{this.state.expanded ? this.renderExpanded() : this.renderCollapsed()}
+				{expanded ? this.renderExpanded() : this.renderCollapsed()}
 			</div>
 		);
 	}

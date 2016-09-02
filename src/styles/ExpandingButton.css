@@ -1,0 +1,11 @@
+.ExpandingButton {
+	padding: 11px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 15px;
+	border-color: rgb(73, 219, 164);
+}
+
+.ExpandingButton .ExpandingButton--small {
+	padding: 15px 11px;
+}
