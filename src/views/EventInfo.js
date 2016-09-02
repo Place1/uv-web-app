@@ -5,6 +5,11 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import ExpandingButton from '../components/ExpandingButton';
 import loadEvents from '../actions/loadEvents';
 import setTitle from '../actions/setTitle';
+import setNavButton, {
+	NAV_BUTTON_LEFT,
+	NAV_BUTTON_RIGHT
+} from '../actions/setNavButton';
+import { hashHistory } from 'react-router';
 import '../styles/EventInfo.css';
 
 function mapStateToProps(state, props) {
@@ -24,6 +29,12 @@ function mapDispatchToProps(dispatch, props) {
 			return dispatch(loadEvents({ id: props.params.id }));
 		},
 		setTitle: title => dispatch(setTitle(title)),
+		setLeftNavButton: content => {
+			return dispatch(setNavButton(NAV_BUTTON_LEFT, content));
+		},
+		setRightNavButton: content => {
+			return dispatch(setNavButton(NAV_BUTTON_RIGHT, content));
+		}
 	}
 }
 
@@ -40,6 +51,12 @@ class EventInfo extends React.Component {
 		const event = this.props.event;
 		const name = event ? event.name : '';
 		this.props.setTitle(name);
+		this.props.setLeftNavButton(
+			<i className="fa fa-chevron-left"
+				onClick={() => hashHistory.push('/')}
+			/>
+		);
+		this.props.setRightNavButton(null);
 		if (!this.props.event) {
 			this.props.loadEvent();
 		}
