@@ -1,0 +1,15 @@
+.refresh-button {
+}
+
+.refresh-button--spinning {
+	animation: refresh-button-spin linear 1.5s infinite;
+}
+
+@keyframes refresh-button-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { login } from '../actions/login';
 import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
+import setNavButton, {
+	NAV_BUTTON_LEFT,
+	NAV_BUTTON_RIGHT
+} from '../actions/setNavButton';
 import setTitle from '../actions/setTitle';
 import LoadingIndicator from '../components/LoadingIndicator';
+import RefreshButton from '../components/RefreshButton';
 import moment from 'moment';
 import '../styles/Upcoming.css';
 
@@ -22,6 +27,12 @@ function mapDispatchToProps(dispatch) {
 		setTitle: title => {
 			dispatch(setTitle(title))
 		},
+		setLeftNavButton: content => {
+			return dispatch(setNavButton(NAV_BUTTON_LEFT, content));
+		},
+		setRightNavButton: content => {
+			return dispatch(setNavButton(NAV_BUTTON_RIGHT, content));
+		}
 	};
 }
 
@@ -39,6 +50,10 @@ class Upcoming extends React.Component {
 	componentDidMount() {
 		this.props.setEvents();
 		this.props.setTitle('Upcoming');
+		this.props.setLeftNavButton(null);
+		this.props.setRightNavButton(
+			<RefreshButton onClick={() => this.props.setEvents()} />
+		);
 	}
 
 	truncateString(s) {

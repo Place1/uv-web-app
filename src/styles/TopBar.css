@@ -18,10 +18,15 @@
 }
 
 .top-bar__container--middle {
-	flex-grow: 3;
+	flex-grow: 3.2;
 	color: white;
 	font-size: 18px;
 	letter-spacing: 0.5px;
+}
+
+.top-bar__container--left, .top-bar__container--right {
+	color: white;
+	font-size: 18px;
 }
 
 .top-bar__container--middle div {
