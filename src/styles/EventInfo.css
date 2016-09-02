@@ -71,7 +71,7 @@ hr {
   padding-bottom: 20px;
 }
 
-.eventContent .eventDate {
+.eventDate, .eventLocation {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -79,17 +79,18 @@ hr {
 	margin-bottom: 20px;
 }
 
-.eventContent .eventDate__icon {
-	font-size: 30px;
+.eventDate__icon, .eventLocation__icon {
+	font-size: 30px !important;
 	margin-right: 10px;
-	display: flex;
-	align-items: center;
+	display: block;
+  align-self: center;
 }
 
-.eventContent .eventDate__text {
+.eventDate__text, .eventLocation__text {
+  align-self: center;
 	text-align: center;
 }
 
-.eventContent .eventDescription {
+.eventDescription {
   font-size: 20px;
 }

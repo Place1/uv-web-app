@@ -82,13 +82,17 @@ class EventInfo extends React.Component {
 				<hr/>
 				<div className="eventContent">
 					<div className="eventDate">
-						<div className="eventDate__icon">
-							<i className="fa fa-clock-o" />
-						</div>
+						<i className="eventDate__icon fa fa-clock-o" />
 						<div className="eventDate__text">
 							{moment(this.props.event.startTime).format('h:mmA dddd')}
 							<br/>
 							{moment(this.props.event.startTime).format('do MMMM')}
+						</div>
+					</div>
+					<div className="eventLocation">
+						<i className="eventLocation__icon fa fa-map-marker" />
+						<div className="eventLocation__text">
+							{this.props.event.location.name}
 						</div>
 					</div>
 					<ExpandingButton
