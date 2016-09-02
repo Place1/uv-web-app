@@ -7,57 +7,16 @@ body {
 	text-decoration: none !important;
 }
 
-/*login view styles*/
-.loginView {
-	height: 100vh;
-	width: 100vw;
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
-}
-
-.loginView .loginForm {
-	width: 200px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
-
-.loginForm input[type='submit'] {
-	margin-top: 20px;
-	border-width: 1px;
-	border-radius: 8px;
-	border-color: rgb(208, 208, 208);
-	background-color: white;
-}
-
-.loginForm input[type='submit']:hover {
-	background-color: rgba(86, 227, 147, 0.3);
-}
-
-.loginForm input[type='text'],
-.loginForm input[type='password'] {
-	margin-bottom: 20px;
-	height: 25px;
-	border-width: 1px;
-	border-radius: 8px;
-	border-style: solid;
-	border-color: rgb(208, 208, 208);
-}
-
-.help-text {
-	color: rgb(162, 70, 70);
-}
-
 /* animations */
+
+/*nav fade in out*/
 .navigation-animation-enter {
   opacity: 0.01;
 }
 
 .navigation-animation-enter.navigation-animation-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in-out;
 }
 
 .navigation-animation-leave {
@@ -66,5 +25,25 @@ body {
 
 .navigation-animation-leave.navigation-animation-leave-active {
   opacity: 0.01;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in-out;
+}
+
+/*top bar slide down*/
+.slide-down-appear {
+  top: -50px;
+}
+
+.slide-down-appear.slide-down-appear-active {
+  top: 0px;
+  transition: top 600ms ease-in-out;
+}
+
+/*tab bar slide up*/
+.slide-up-appear {
+  bottom: -50px;
+}
+
+.slide-up-appear.slide-up-appear-active {
+  bottom: 0px;
+  transition: bottom 600ms ease-in-out;
 }

@@ -1,0 +1,41 @@
+.loginView {
+	height: calc(100vh - 50px - 50px);
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.loginView .loginForm {
+	width: 200px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.loginForm button[type='submit'] {
+	margin-top: 0px;
+	border-width: 1px;
+	border-radius: 8px;
+	border-color: rgb(208, 208, 208);
+	background-color: white;
+}
+
+.loginForm input[type='submit']:hover {
+	background-color: rgba(86, 227, 147, 0.3);
+}
+
+.loginForm input[type='text'],
+.loginForm input[type='password'] {
+	margin-bottom: 20px;
+	height: 25px;
+	border-width: 1px;
+	border-radius: 8px;
+	border-style: solid;
+	border-color: rgb(208, 208, 208);
+}
+
+.help-text {
+	color: rgb(162, 70, 70);
+}

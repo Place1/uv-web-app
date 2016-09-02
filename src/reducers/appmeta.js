@@ -7,7 +7,7 @@ import {
 } from '../actions/setNavButton';
 
 const initialState = {
-	loading: true,
+	loading: false,
 	title: 'Univent',
 	[NAV_BUTTON_LEFT]: null,
 	[NAV_BUTTON_RIGHT]: null,

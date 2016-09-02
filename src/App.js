@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import TabBar from './components/TabBar';
 import TopBar from './components/TopBar';
+import Login from './views/Login';
 import LoadingIndicator from './components/LoadingIndicator';
 
 function mapStateToProps(state) {
@@ -28,6 +29,15 @@ class App extends React.Component {
 		return (
 			<div>
 				<ReactCSSTransitionGroup
+					transitionName="slide-down"
+					transitionAppear={true}
+					transitionAppearTimeout={600}
+					transitionEnterTimeout={600}
+					transitionLeaveTimeout={600}
+				>
+					<TopBar key={1} />
+				</ReactCSSTransitionGroup>
+				<ReactCSSTransitionGroup
 					transitionName="navigation-animation"
 					transitionEnterTimeout={500}
 					transitionLeaveTimeout={500}
@@ -35,6 +45,15 @@ class App extends React.Component {
 					{React.cloneElement(this.props.children, {
 						key: this.props.location.pathname
 					})}
+				</ReactCSSTransitionGroup>
+				<ReactCSSTransitionGroup
+					transitionName="slide-up"
+					transitionAppear={true}
+					transitionAppearTimeout={600}
+					transitionEnterTimeout={600}
+					transitionLeaveTimeout={600}
+				>
+					<TabBar key={1} />
 				</ReactCSSTransitionGroup>
 			</div>
 		);
@@ -53,17 +72,14 @@ class App extends React.Component {
 	}
 
 	render() {
-		if (this.props.loading) {
-			return <div className="app">{this.render_loading()}</div>
-		}
 		return (
 			<div className="app">
-				<TopBar />
-				{(this.props.isAuthenticated) ?
-					this.render_authenticated() :
-					this.render_login()
+				{this.props.loading ?
+					this.render_loading() :
+					this.props.isAuthenticated ?
+						this.render_authenticated() :
+						this.render_login()
 				}
-				<TabBar />
 			</div>
 		);
 	}
