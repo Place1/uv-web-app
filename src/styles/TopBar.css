@@ -20,3 +20,29 @@
 .top-bar__container--middle {
 	flex-grow: 2.7;
 }
+
+.top-bar__container--middle div {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* animations */
+.fade-animation-enter {
+  opacity: 0;
+}
+
+.fade-animation-enter.fade-animation-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-animation-leave {
+  opacity: 1;
+}
+
+.fade-animation-leave.fade-animation-leave-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}

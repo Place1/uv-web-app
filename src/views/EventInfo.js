@@ -35,23 +35,23 @@ class EventInfo extends React.Component {
 	}
 
 	componentDidMount() {
+		const event = this.props.event;
+		const name = event ? event.name : '';
+		this.props.setTitle(name);
 		if (!this.props.event) {
 			this.props.loadEvent();
 		}
-		else {
-			this.props.setTitle('');
-		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.event && nextProps.event.name) {
-			this.props.setTitle(nextProps.event.name);
+	componentDidUpdate(prevProps) {
+		if (!prevProps.event && this.props.event) {
+			this.props.setTitle(this.props.event.name);
 		}
 	}
 
 	render() {
 		if (!this.props.event) {
-			return <LoadingIndicator />
+			return <LoadingIndicator />;
 		}
 
 		return (
