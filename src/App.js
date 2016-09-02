@@ -54,10 +54,10 @@ class App extends React.Component {
 
 	render() {
 		if (this.props.loading) {
-			return this.render_loading();
+			return <div className="app">{this.render_loading()}</div>
 		}
 		return (
-			<div>
+			<div className="app">
 				<TopBar />
 				{(this.props.isAuthenticated) ?
 					this.render_authenticated() :
