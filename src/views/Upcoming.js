@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
 import setTitle from '../actions/setTitle';
 import LoadingIndicator from '../components/LoadingIndicator';
+import moment from 'moment';
 import '../styles/Upcoming.css';
 
 function mapStateToProps(state) {
@@ -49,6 +50,12 @@ class Upcoming extends React.Component {
 		return truncated.join(' ');
 	}
 
+	sepDateString(date) {
+		// return a string for the date.
+		// string is used in the event seperators.
+		return moment(date).format('dddd do - MMMM');
+	}
+
 	render() {
 		if (this.props.loading) {
 			return <LoadingIndicator />;
@@ -67,7 +74,7 @@ class Upcoming extends React.Component {
 								if (index === 0 || (new Date(array[index-1].startTime).getDate() !== (new Date(data.startTime)).getDate())) {
 									seperator = (
 										<div className="listItem seperator">
-											<span className="seperator-date">{(new Date(data.startTime)).toDateString()}</span>
+											<span className="seperator-date">{this.sepDateString(new Date(data.startTime))}</span>
 										</div>
 									);
 								}
