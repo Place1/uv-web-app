@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { setEvents } from '../actions/SetEvents';
 import setTitle from '../actions/setTitle';
 import LoadingIndicator from '../components/LoadingIndicator';
+import '../styles/Upcoming.css';
 
 function mapStateToProps(state) {
 	return {
