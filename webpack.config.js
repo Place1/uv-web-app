@@ -2,6 +2,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 let plugins = [
 	new webpack.DefinePlugin({
@@ -19,7 +22,7 @@ let plugins = [
 ]
 
 module.exports = {
-	devtool: 'eval-source-map',
+	devtool: isProd ? 'source-map' : 'eval-source-map',
 	entry: './src/index.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -38,7 +41,7 @@ module.exports = {
 			}
 		}, {
 			test: /.css$/,
-			loaders: ['style', 'css']
+			loaders: ['style', 'css', 'postcss']
 		}, {
 			test: /\.(png|woff|woff2|eot|ttf|svg|)$/,
 			loader: 'url-loader?limit=10000'
@@ -52,7 +55,17 @@ module.exports = {
 			loader: "file-loader"
 		}]
 	},
+	postcss: function() {
+		return isProd ? [autoprefixer] : [];
+	},
 	devServer: {
 		port: 3000
 	}
 };
+
+if (isProd) {
+	module.exports.entry = [
+		'babel-polyfill',
+		module.exports.entry
+	];
+}
