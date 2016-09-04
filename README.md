@@ -1,7 +1,24 @@
-#ReactJS frontend project boilerplate
+#uv-web-app
 
-###Usage:
+## run with docker:
+```
+docker build -t uv-web-app .
+docker run -p 8000:80 uv-web-app
+```
 
-	npm install # install dependancies
+## run locally
+```
+npm run serve
+```
 
-	./node_modules/.bin/webpack-dev-server # run the dev server.
+## build
+```
+# development builds
+npm run build
+
+# production builds
+npm run build:production
+```
+
+## Licence
+MIT - see licence file

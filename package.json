@@ -1,7 +1,7 @@
 {
-  "name": "react_js_boilerplate",
+  "name": "uv-web-app",
   "version": "1.0.0",
-  "description": "react_js_boilerplate",
+  "description": "an experimental web app for my univent project",
   "main": "src/App.js",
   "scripts": {
     "build": "webpack",
