@@ -4,7 +4,7 @@ import { VERIFY_TOKEN } from '../actions/verifyToken';
 const token = window.localStorage.getItem('jwt');
 
 const initialState = {
-	isAuthenticated: false, // always start false until token is verified.
+	isAuthenticated: token ? true : false, // always start false until token is verified.
 	jwt: token
 };
 
