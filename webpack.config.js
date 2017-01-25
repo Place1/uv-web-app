@@ -23,7 +23,10 @@ let plugins = [
 
 module.exports = {
 	devtool: isProd ? 'source-map' : 'eval-source-map',
-	entry: './src/index.js',
+	entry: [
+		'webpack/hot/dev-server',
+		'./src/index.js'
+	],
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'App.js',
@@ -33,12 +36,8 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.jsx?$/,
-			loader: 'babel-loader',
-			exclude: /(node_modules|bower_components)/,
-			query: {
-				presets: ['es2015', 'react', 'stage-0'],
-				plugins: ['transform-decorators-legacy']
-			}
+			loaders: ['react-hot', 'babel-loader'],
+			include: path.join(__dirname, 'src'),
 		}, {
 			test: /.css$/,
 			loaders: ['style', 'css', 'postcss']
