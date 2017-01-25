@@ -1,32 +1,31 @@
 import axios from 'axios';
-import store from '../store';
 
 class EventsApiResource {
-	constructor(url) {
-		this._url = url;
-	}
+  constructor(url) {
+    this.url = url;
+  }
 
-	get(params) {
-		return axios({
-			method: 'GET',
-			url: this._url,
-			params: params,
-		})
-	}
+  get(params) {
+    return axios({
+      method: 'GET',
+      url: this.url,
+      params,
+    });
+  }
 
-	trending() {
-		return axios({
-			method: 'GET',
-			url: this._url + 'trending/',
-		});
-	}
+  trending() {
+    return axios({
+      method: 'GET',
+      url: `${this.url}trending/`,
+    });
+  }
 
-	newEvents() {
-		return axios({
-			method: 'GET',
-			url: this._url + 'new/',
-		});
-	}
+  newEvents() {
+    return axios({
+      method: 'GET',
+      url: `${this.url}new/`,
+    });
+  }
 }
 
 export default EventsApiResource;

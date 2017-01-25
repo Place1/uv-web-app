@@ -4,9 +4,9 @@ import events from './events';
 import appmeta from './appmeta';
 
 const reducer = combineReducers({
-	events: events,
-	userInfo: userInfo,
-	appmeta: appmeta,
+  events,
+  userInfo,
+  appmeta,
 });
 
 export default reducer;
