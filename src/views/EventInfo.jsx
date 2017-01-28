@@ -1,22 +1,23 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { hashHistory } from 'react-router';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ExpandingButton from '../components/ExpandingButton';
 import loadEvents from '../actions/loadEvents';
 import setTitle from '../actions/setTitle';
 import setNavButton, {
-	NAV_BUTTON_LEFT,
-	NAV_BUTTON_RIGHT,
+  NAV_BUTTON_LEFT,
+  NAV_BUTTON_RIGHT,
 } from '../actions/setNavButton';
-import { hashHistory } from 'react-router';
 import '../styles/EventInfo.css';
 
 function mapStateToProps(state, props) {
   const event = state.events.items.find((element) => {
-    if (element.id == props.params.id) {
+    if (element.id === parseInt(props.params.id, 10)) {
       return element;
     }
+    return false;
   });
   return {
     event,
@@ -36,9 +37,24 @@ function mapDispatchToProps(dispatch, props) {
 class EventInfo extends React.Component {
 
   static propTypes = {
-    params: PropTypes.object.isRequired, // includes 'id' property.
-    event: PropTypes.object, // if not provided, loadEvent() will be called to get it.
+    event: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      facebookCoverSource: PropTypes.string.isRequired,
+      club_name: PropTypes.string.isRequired,
+      attendingCount: PropTypes.number.isRequired,
+      maybeCount: PropTypes.number.isRequired,
+      noReplyCount: PropTypes.number.isRequired,
+      startTime: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+      description: PropTypes.string.isRequired,
+    }), // if not provided, loadEvent() will be called to get it.
     loadEvent: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
+    setLeftNavButton: PropTypes.func.isRequired,
+    setRightNavButton: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -46,11 +62,11 @@ class EventInfo extends React.Component {
     const name = event ? event.name : '';
     this.props.setTitle(name);
     this.props.setLeftNavButton(
-      <i
-        className="fa fa-chevron-left"
+      <button
+        className="event-info__back-btn fa fa-chevron-left"
         onClick={() => hashHistory.push('/')}
       />,
-		);
+    );
     this.props.setRightNavButton(null);
     if (!this.props.event) {
       this.props.loadEvent();
@@ -68,49 +84,65 @@ class EventInfo extends React.Component {
       return <LoadingIndicator />;
     }
 
+    const {
+      name,
+      description,
+      facebookCoverSource,
+      attendingCount,
+      maybeCount,
+      noReplyCount,
+      location,
+      startTime,
+      club_name: clubName,
+    } = this.props.event;
+
     return (
-      <div className="eventInfo">
-        <img className="eventCoverImage" src={this.props.event.facebookCoverSource} />
-        <div className="eventStatsBox">
-          <div className="eventStatsBoxItem">
-            <div>{this.props.event.attendingCount}</div>
+      <div className="event-info">
+        <img className="event-info__cover-image" alt="event" src={facebookCoverSource} />
+        <div className="event-info__stats">
+          <div className="event-info__stats-item">
+            <div>{attendingCount}</div>
             <div>Attending</div>
           </div>
-          <div className="eventStatsBox__item-spacer" />
-          <div className="eventStatsBoxItem">
-            <div>{this.props.event.maybeCount}</div>
+          <div className="event-info__stats-spacer" />
+          <div className="event-info__stats-item">
+            <div>{maybeCount}</div>
             <div>Maybe</div>
           </div>
-          <div className="eventStatsBox__item-spacer" />
-          <div className="eventStatsBoxItem">
-            <div>{this.props.event.attendingCount + this.props.event.maybeCount + this.props.event.noReplyCount}</div>
+          <div className="event-info__stats-spacer" />
+          <div className="event-info__stats-item">
+            <div>
+              {attendingCount +
+                maybeCount +
+                noReplyCount}
+            </div>
             <div>Invited</div>
           </div>
         </div>
-        <div className="eventHeaders">
-          <h2 className="eventTitle">{this.props.event.name}</h2>
-          <h3 className="eventClub">{this.props.event.club_name}</h3>
+        <div className="event-info__headers">
+          <h2 className="event-info__title">{name}</h2>
+          <h3 className="event-info__club">{clubName}</h3>
         </div>
         <hr />
-        <div className="eventContent">
-          <div className="eventDate">
-            <i className="eventDate__icon fa fa-clock-o" />
-            <div className="eventDate__text">
-              {moment(this.props.event.startTime).format('h:mmA dddd')}
+        <div className="event-info__content">
+          <div className="event-info__date-section">
+            <i className="event-info__date-icon fa fa-clock-o" />
+            <div className="event-info__date">
+              {moment(startTime).format('h:mmA dddd')}
               <br />
-              {moment(this.props.event.startTime).format('do MMMM')}
+              {moment(startTime).format('do MMMM')}
             </div>
           </div>
-          <div className="eventLocation">
-            <i className="eventLocation__icon fa fa-map-marker" />
-            <div className="eventLocation__text">
-              {this.props.event.location.name}
+          <div className="event-info__location-section">
+            <i className="event-info__location-icon fa fa-map-marker" />
+            <div className="event-info__location">
+              {location.name}
             </div>
           </div>
           <ExpandingButton
             title="Description"
-            content={this.props.event.description}
-            className="eventDescription"
+            content={description}
+            className="event-info__description"
           />
         </div>
       </div>

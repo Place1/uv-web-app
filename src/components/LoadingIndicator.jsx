@@ -1,19 +1,21 @@
 import React, { PropTypes } from 'react';
 import '../styles/LoadingIndicator.css';
 
-class LoadingIndicator extends React.Component {
-  render() {
-    const { className, ...props } = this.props;
+function LoadingIndicator(props) {
+  const { className, ...otherProps } = props;
 
-    return (
-      <div {...props} className={`${className} sk-folding-cube`}>
-        <div className="sk-cube1 sk-cube" />
-        <div className="sk-cube2 sk-cube" />
-        <div className="sk-cube4 sk-cube" />
-        <div className="sk-cube3 sk-cube" />
-      </div>
-    );
-  }
+  return (
+    <div {...otherProps} className={`${className} sk-folding-cube`}>
+      <div className="sk-cube1 sk-cube" />
+      <div className="sk-cube2 sk-cube" />
+      <div className="sk-cube4 sk-cube" />
+      <div className="sk-cube3 sk-cube" />
+    </div>
+  );
 }
+
+LoadingIndicator.propTypes = {
+  className: PropTypes.string,
+};
 
 export default LoadingIndicator;

@@ -1,5 +1,12 @@
-.eventInfo {
+.event-info {
 
+}
+
+.event-info__back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
 }
 
 hr {
@@ -14,14 +21,14 @@ hr {
   border: 0;
 }
 
-.eventCoverImage {
+.event-info__cover-image {
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
 	display: block;
 }
 
-.eventStatsBox {
+.event-info__stats {
 	display: flex;
 	justify-content: space-around;
 	flex-direction: row;
@@ -32,24 +39,25 @@ hr {
 	padding: 5px;
 }
 
-.eventStatsBox__item-spacer {
+.event-info__stats-item {
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+
+.event-info__stats-spacer {
 	height: 32px;
 	width: 1px;
 	background-color: rgb(186, 181, 181);
 }
 
-.eventStatsBoxItem {
-	flex-basis: 0;
-	flex-grow: 1;
-}
-
-.eventHeaders {
+.event-info__headers {
 	padding-left: 20px;
 	padding-right: 20px;
 	letter-spacing: 0.8px;
 }
 
-.eventTitle {
+.event-info__title {
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -58,7 +66,7 @@ hr {
 	letter-spacing: 0.8px;
 }
 
-.eventClub {
+.event-info__club {
 	text-align: center;
 	margin: 0px;
 	color: rgb(77, 77, 77);
@@ -66,12 +74,15 @@ hr {
 	font-size: 15px;
 }
 
-.eventContent {
+.event-info__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 	margin: 0px 20px;
   padding-bottom: 20px;
 }
 
-.eventDate, .eventLocation {
+.event-info__date-section, .event-info__location-section {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -79,18 +90,18 @@ hr {
 	margin-bottom: 20px;
 }
 
-.eventDate__icon, .eventLocation__icon {
+.event-info__date-icon, .event-info__location-icon {
 	font-size: 30px !important;
 	margin-right: 10px;
 	display: block;
   align-self: center;
 }
 
-.eventDate__text, .eventLocation__text {
+.event-info__date, .event-info__location {
   align-self: center;
 	text-align: center;
 }
 
-.eventDescription {
+.event-info__description {
   font-size: 20px;
 }

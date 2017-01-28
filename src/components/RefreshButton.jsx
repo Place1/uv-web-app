@@ -26,7 +26,7 @@ class RefreshButton extends React.Component {
     const spinningModifer = spinning ? 'refresh-button--spinning' : '';
 
     return (
-      <i
+      <button
         onClick={onClick}
         className={`fa fa-refresh ${className} refresh-button ${spinningModifer}`}
       />

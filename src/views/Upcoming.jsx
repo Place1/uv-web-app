@@ -10,7 +10,7 @@ import setNavButton, {
 import setTitle from '../actions/setTitle';
 import LoadingIndicator from '../components/LoadingIndicator';
 import RefreshButton from '../components/RefreshButton';
-import truncateString from '../util/truncateString';
+import EventListItem from '../components/EventListItem';
 import '../styles/Upcoming.css';
 
 function mapStateToProps(state) {
@@ -52,48 +52,49 @@ class Upcoming extends React.Component {
     );
   }
 
-  render() {
-    if (this.props.loading) {
-      return <LoadingIndicator />;
+  renderLoadingState() {
+    if (this.props.loading === true) {
+      return <LoadingIndicator className="upcoming__loading-indicator" />;
+    }
+    return null;
+  }
+
+  renderEventList() {
+    const { events } = this.props;
+
+    if (events.length === 0) {
+      return <div className="upcoming__list-item">No events</div>;
     }
 
-    return (
-      <div>
-        <div className="list">
-          {(() => {
-            if (this.props.events.length === 0) {
-              return <div className="listItem">No events</div>;
-            }
-
-            return this.props.events.map((data, index, array) => {
-              let seperator = null;
-              if (index === 0 ||
-                (new Date(array[index - 1].startTime).getDate() !==
-                (new Date(data.startTime)).getDate())
-              ) {
-                seperator = (
-                  <div className="listItem seperator">
-                    <span className="seperator-date">{moment(new Date(data.startTime)).format('dddd do - MMMM')}</span>
-                  </div>
-                  );
-              }
-              return (
-                <div key={data.id}>
-                  {seperator}
-                  <Link to={`/event/${data.id}`} className="noUnderline">
-                    <div className="listItem">
-                      <img className="thumbnail" alt="event thumbnail" src={data.facebookProfileSource} />
-                      <div className="content">
-                        <h2 className="title">{data.name}</h2>
-                        <p className="description">{truncateString(data.description || '')}</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            });
-          })()}
+    return events.map((data, index, array) => {
+      let seperator = null;
+      if (index !== 0) {
+        const currentItemStartTime = moment(data.startTime);
+        const previousItemStartTime = moment(array[index - 1].startTime);
+        if (currentItemStartTime.startOf('day') !== previousItemStartTime.startOf('day')) {
+          seperator = (
+            <div className="upcoming__list-seperator">
+              <span className="upcoming__seperator-date">{moment(new Date(data.startTime)).format('dddd do - MMMM')}</span>
+            </div>
+          );
+        }
+      }
+      return (
+        <div key={data.id}>
+          {seperator}
+          <Link to={`/event/${data.id}`} className="noUnderline">
+            <EventListItem {...data} />
+          </Link>
         </div>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div className="upcoming">
+        {this.renderLoadingState()}
+        {this.renderEventList()}
       </div>
     );
   }

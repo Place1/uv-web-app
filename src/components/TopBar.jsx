@@ -12,39 +12,41 @@ function mapStateToProps(state) {
   };
 }
 
-@connect(mapStateToProps, null)
-class MyComponent extends React.Component {
+function TopBar(props) {
+  const {
+    title,
+    rightBtn,
+    leftBtn,
+  } = props;
 
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    leftBtn: PropTypes.node,
-    rightBtn: PropTypes.node,
-  }
+  const right = rightBtn ? React.cloneElement(rightBtn) : null;
+  const left = leftBtn ? React.cloneElement(leftBtn) : null;
 
-  render() {
-    const right = this.props.rightBtn ? React.cloneElement(this.props.rightBtn) : null;
-    const left = this.props.leftBtn ? React.cloneElement(this.props.leftBtn) : null;
-
-    return (
-      <div className="top-bar">
-        <div className="top-bar__container top-bar__container--left">
-          {left}
-        </div>
-        <div className="top-bar__container top-bar__container--middle">
-          <ReactCSSTransitionGroup
-            transitionName="fade-animation"
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-          >
-            <div key={this.props.title}>{this.props.title}</div>
-          </ReactCSSTransitionGroup>
-        </div>
-        <div className="top-bar__container top-bar__container--right">
-          {right}
-        </div>
+  return (
+    <div className="top-bar">
+      <div className="top-bar__container top-bar__container--left">
+        {left}
       </div>
-    );
-  }
+      <div className="top-bar__container top-bar__container--middle">
+        <ReactCSSTransitionGroup
+          transitionName="fade-animation"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          <div key={title}>{title}</div>
+        </ReactCSSTransitionGroup>
+      </div>
+      <div className="top-bar__container top-bar__container--right">
+        {right}
+      </div>
+    </div>
+  );
 }
 
-export default MyComponent;
+TopBar.propTypes = {
+  title: PropTypes.string.isRequired,
+  leftBtn: PropTypes.node,
+  rightBtn: PropTypes.node,
+};
+
+export default connect(mapStateToProps, null)(TopBar);

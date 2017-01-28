@@ -1,4 +1,7 @@
 .refresh-button {
+	border: none;
+	background: none;
+	color: white;
 }
 
 .refresh-button--spinning {

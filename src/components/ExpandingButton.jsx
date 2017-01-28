@@ -32,7 +32,7 @@ class ExpandingButton extends React.Component {
   renderCollapsed() {
     return (
       <div
-        className="ExpandingButton-collapsed"
+        className="expanding-button-collapsed"
         style={{ textAlign: 'center' }}
       >
         {this.props.title}
@@ -42,20 +42,21 @@ class ExpandingButton extends React.Component {
 
   renderExpanded() {
     return (
-      <div className="ExpandingButton-expanded">{this.props.content}</div>
+      <div className="expanding-button-expanded">{this.props.content}</div>
     );
   }
 
   render() {
     const expanded = this.state.expanded;
-    const modifierClass = !expanded ? 'ExpandingButton--small' : '';
+    const modifierClass = !expanded ? 'expanding-button--small' : '';
+
     return (
-      <div
-        className={`ExpandingButton ${modifierClass} ${this.props.className}`}
+      <button
+        className={`expanding-button ${modifierClass} ${this.props.className}`}
         onClick={this.handleClick}
       >
         {expanded ? this.renderExpanded() : this.renderCollapsed()}
-      </div>
+      </button>
     );
   }
 }

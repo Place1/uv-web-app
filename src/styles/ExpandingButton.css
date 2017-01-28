@@ -1,11 +1,16 @@
-.ExpandingButton {
+.expanding-button {
 	padding: 11px;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 15px;
 	border-color: rgb(73, 219, 164);
+	background: none;
 }
 
-.ExpandingButton .ExpandingButton--small {
+.expanding-button:focus {
+	outline: none;
+}
+
+.expanding-button .expanding-button--small {
 	padding: 15px 11px;
 }
