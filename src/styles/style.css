@@ -11,6 +11,7 @@ body {
 
 /*nav fade in out*/
 .navigation-animation-enter {
+	position: absolute;
   opacity: 0.01;
 }
 
@@ -20,6 +21,7 @@ body {
 }
 
 .navigation-animation-leave {
+	position: absolute;
   opacity: 1;
 }
 
