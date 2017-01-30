@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 class EventsApiResource {
   constructor(url) {
@@ -24,6 +25,12 @@ class EventsApiResource {
     return axios({
       method: 'GET',
       url: `${this.url}new/`,
+    });
+  }
+
+  upcomingEvents() {
+    return this.get({
+      after: moment().startOf('day').toISOString(),
     });
   }
 }

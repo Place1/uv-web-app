@@ -5,7 +5,7 @@ const SET_EVENTS = 'SET_EVENTS';
 function setEvents() {
   return {
     type: SET_EVENTS,
-    payload: Api.events.newEvents()
+    payload: Api.events.upcomingEvents()
       .then(r => r.data),
   };
 }
